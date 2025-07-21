@@ -1,4 +1,5 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@import './view-transitions.css';
 
 :root {
   --background: #ffffff;
@@ -19,8 +20,180 @@
   }
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
+  background-color: var(--foreground);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.body-wrapper {
+  background: var(--background);
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+h1 {
+  font-size: 4.25rem;
+  font-weight: 600;
+  letter-spacing: -0.1rem;
+  line-height: 1;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.04rem;
+  line-height: 1.125;
+}
+
+a,
+p {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--foreground);
+  display: block;
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  display: flex;
+  gap: 1em;
+  padding: 1em;
+}
+
+.nav .col:nth-child(1) {
+  flex: 1;
+}
+
+.nav .col:nth-child(2) {
+  flex: 2;
+  display: flex;
+  justify-content: space-between;
+}
+
+.home {
+  width: 100%;
+  height: 100svh;
+  overflow: hidden;
+  background-color: var(--background);
+}
+
+.home .header {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.home .header h1 {
+  font-size: 25vw;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.home .hero-img {
+  position: absolute;
+  bottom: 0%;
+  left: 50%;
+  width: 95%;
+  height: 50vh;
+  overflow: hidden;
+  transform: translateX(-50%);
+}
+
+.work {
+  text-align: center;
+  padding: 15em 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  background-color: var(--background);
+}
+
+.work .projects {
+  width: 32%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4em;
+}
+
+.work .projects img {
+  aspect-ratio: 4/5;
+}
+
+.about,
+.contact {
+  padding: 15em 1em;
+  display: flex;
+  gap: 1em;
+  background-color: var(--background);
+}
+
+.about .col:nth-child(1),
+.contact .col:nth-child(1) {
+  flex: 1;
+}
+
+.about .col:nth-child(2),
+.contact .col:nth-child(2) {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.about .about-img {
+  aspect-ratio: 5/7;
+}
+
+.contact {
+  width: 100vw;
+  height: 100%;
+  min-height: 100svh;
+}
+
+.contact .socials {
+  position: absolute;
+  bottom: 1.5em;
+  display: flex;
+  gap: 1em;
+}
+
+.letter,
+.word,
+.line {
+  position: relative;
+  display: inline-block;
+  will-change: transform;
+}
+
+.revealer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100svh;
+  transform-origin: center top;
+  background-color: var(--foreground);
+  pointer-events: none;
+  z-index: 2;
+  mix-blend-mode: difference;
 }
