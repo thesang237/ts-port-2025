@@ -8,7 +8,7 @@ export default function Projects() {
 
   return (
     <>
-      <Revealer />
+      <Revealer title='Projects' />
       <div className='projects-page'>
         <div className='header'>
           <h1>Projects</h1>

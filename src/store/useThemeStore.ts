@@ -2,6 +2,8 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+export type ColorTheme = 'orange' | 'violet' | 'pink' | 'green';
+
 type ThemeState = {
   activeColor: string;
   setActiveColor: (color: string) => void;

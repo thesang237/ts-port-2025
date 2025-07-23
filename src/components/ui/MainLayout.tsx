@@ -8,7 +8,11 @@ const HomeSidebar = dynamic(() => import('./HomeSidebar'), {
   ssr: false,
   loading: () => <div className='p-4'>Loading...</div>,
 });
-import WrapSilk from './WrapSilk';
+const WrapSilk = dynamic(() => import('./WrapSilk'), {
+  ssr: false,
+  loading: () => <div className='p-4'>Loading...</div>,
+});
+// import WrapSilk from './WrapSilk';
 import { ToastProvider } from '@/components/ui/ToastProvider';
 
 interface PortfolioLayoutProps {

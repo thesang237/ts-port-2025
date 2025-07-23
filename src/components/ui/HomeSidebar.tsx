@@ -3,10 +3,8 @@
 import React, { useRef } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
 import { cn, getColorClasses } from '@/lib/utils';
-import { useThemeStore } from '@/store/useThemeStore';
+import { ColorTheme, useThemeStore } from '@/store/useThemeStore';
 import ColorSwitcherWrapper from '@/components/controls/ColorSwitcherWrapper';
 import SidebarSocialButtons from '@/components/controls/SidebarSocialButtons';
 import ProfileSection from '@/components/ui/ProfileSection';
@@ -31,23 +29,20 @@ const HomeSidebar = React.memo(() => {
   const router = useRouter();
   const pathname = usePathname();
   const activeColor = useThemeStore(state => state.activeColor);
-  const colorClasses = getColorClasses(activeColor);
+  const colorClasses = getColorClasses(activeColor as ColorTheme);
 
   const navRef = useRef<HTMLElement>(null);
-  const backgroundRef = useRef<HTMLDivElement>(null);
   const menuRefs = useRef<{ [key: string]: HTMLAnchorElement }>({});
 
   // View Transition Navigation
   function triggerPageTransition(href: string) {
-    if (!(document as any).startViewTransition) {
-      // Fallback: no View Transition support
+    if ('startViewTransition' in document) {
+      document.startViewTransition(() => {
+        router.push(href);
+      });
+    } else {
       router.push(href);
-      return;
     }
-    // Wrap navigation inside view transition
-    (document as any).startViewTransition(() => {
-      router.push(href);
-    });
   }
 
   const handleNavigation =
@@ -75,15 +70,6 @@ const HomeSidebar = React.memo(() => {
           ref={navRef}
           className='glass-sidebar relative col-span-2 space-y-1 p-2'
         >
-          {/* <div
-            ref={backgroundRef}
-            className={cn(
-              'pointer-events-none absolute h-full w-full rounded-full',
-              colorClasses.bg
-            )}
-            style={{ opacity: 0 }}
-          /> */}
-
           {menuItems.map(({ slug, label, icon: Icon }) => {
             const isActive = pathname === slug;
 
@@ -103,7 +89,6 @@ const HomeSidebar = React.memo(() => {
                 {isActive ? (
                   <motion.div
                     layoutId='active-menu-bg'
-                    // style={{ viewTransitionName: 'active-menu-bg' }}
                     className={cn(
                       'pointer-events-none absolute top-0 left-0 z-0 h-full w-full rounded-full',
                       colorClasses.bg

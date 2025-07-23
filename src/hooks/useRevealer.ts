@@ -1,5 +1,10 @@
 'use client';
 
+import {
+  REVEALER_ENTER_DURATION,
+  REVEALER_IN_DURATION,
+  REVEALER_OUT_DURATION,
+} from '@/constants/motion';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import CustomEase from 'gsap/CustomEase';
@@ -12,8 +17,8 @@ export function useRevealer() {
     gsap.to('.revealer', {
       scaleY: 0,
       ease: 'hop',
-      duration: 0.7,
-      delay: 0.8,
+      duration: REVEALER_OUT_DURATION,
+      delay: REVEALER_IN_DURATION + REVEALER_ENTER_DURATION,
     });
   }, {});
 }

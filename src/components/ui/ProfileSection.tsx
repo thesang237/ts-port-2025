@@ -1,6 +1,6 @@
 'use client';
 
-import { useThemeStore } from '@/store/useThemeStore';
+import { ColorTheme, useThemeStore } from '@/store/useThemeStore';
 import RotatingText from '../ui/RotatingText';
 import { cn, getColorClasses } from '@/lib/utils';
 
@@ -16,7 +16,7 @@ const getColorHexById = (theme: string) => {
 
 export default function ProfileSection() {
   const activeColor = useThemeStore(state => state.activeColor);
-  const colorClasses = getColorClasses(activeColor);
+  const colorClasses = getColorClasses(activeColor as ColorTheme);
   const currentColor = getColorHexById(activeColor);
 
   return (
