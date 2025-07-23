@@ -1,7 +1,6 @@
 'use client';
 
 import { useGSAP } from '@gsap/react';
-import { useRef } from 'react';
 import gsap from 'gsap';
 import CustomEase from 'gsap/CustomEase';
 
@@ -14,7 +13,7 @@ export function useRevealer() {
       scaleY: 0,
       ease: 'hop',
       duration: 0.7,
-      delay: 0.7,
+      delay: 0.8,
     });
-  });
+  }, {});
 }

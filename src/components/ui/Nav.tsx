@@ -19,28 +19,27 @@ const Nav = () => {
         },
       ],
       {
-        // delay: 1000,
         duration: 1000,
         easing: 'cubic-bezier(0.9, 0.0, 0.1, 1.0)',
         pseudoElement: '::view-transition-new(root)',
       }
     );
-    document.documentElement.animate(
-      [
-        {
-          clipPath: 'polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)',
-        },
-        {
-          clipPath: 'polygon(25% 25%, 75% 25%, 75% 25%, 25% 25%)',
-          // clipPath: 'polygon(0% 50%, 25% 50%, 75% 50%, 100% 50%)',
-        },
-      ],
-      {
-        duration: 1000,
-        easing: 'cubic-bezier(0.9, 0.0, 0.1, 1.0)',
-        pseudoElement: '::view-transition-old(root)',
-      }
-    );
+    // document.documentElement.animate(
+    //   [
+    //     {
+    //       clipPath: 'polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)',
+    //     },
+    //     {
+    //       clipPath: 'polygon(25% 25%, 75% 25%, 75% 25%, 25% 25%)',
+    //       // clipPath: 'polygon(0% 50%, 25% 50%, 75% 50%, 100% 50%)',
+    //     },
+    //   ],
+    //   {
+    //     duration: 1000,
+    //     easing: 'cubic-bezier(0.9, 0.0, 0.1, 1.0)',
+    //     pseudoElement: '::view-transition-old(root)',
+    //   }
+    // );
   }
 
   const handleNavigation =

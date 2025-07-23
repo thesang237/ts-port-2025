@@ -1,22 +1,16 @@
-"use client"
+'use client';
 
-import { useRevealer } from "@/hooks/useRevealer"
+import { useRevealer } from '@/hooks/useRevealer';
+import Revealer from '@/components/ui/Revealer';
+import HomePage from '@/modules/HomePage';
 
 export default function Home() {
   useRevealer();
 
-  
   return (
-   <>
-   <div className="revealer"></div>
-    <div className="home">
-      <div className="header">
-        <h1>thesang</h1>
-      </div>
-      <div className="hero-img">
-        <img src="/hero.png" alt="" />
-      </div>
-    </div>
-   </>
+    <>
+      <Revealer />
+      <HomePage />
+    </>
   );
 }
