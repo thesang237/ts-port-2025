@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@import './view-transitions.css';
+/* @import './view-transitions.css'; */
 
 :root {
   --background: #ffffff;

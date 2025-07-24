@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText as GSAPSplitText } from 'gsap/SplitText';
+import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(ScrollTrigger, GSAPSplitText);
 
@@ -59,132 +60,103 @@ const SplitText: React.FC<SplitTextProps> = ({
 
   const text = getTextContent(children);
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+  useGSAP(
+    () => {
+      const el = ref.current;
+      if (!el) return;
 
-    let splitter: GSAPSplitText;
-    let tl: gsap.core.Timeline;
-    let targets: Element[];
+      let splitter: GSAPSplitText;
+      let tl: gsap.core.Timeline;
+      let targets: Element[];
 
-    const createAnimation = () => {
-      if (animationCompletedRef.current) return;
+      const createAnimation = () => {
+        if (animationCompletedRef.current) return;
 
-      const absoluteLines = splitType === 'lines';
-      if (absoluteLines) el.style.position = 'relative';
+        const absoluteLines = splitType === 'lines';
+        if (absoluteLines) el.style.position = 'relative';
 
-      splitter = new GSAPSplitText(el, {
-        type: splitType,
-        absolute: absoluteLines,
-        linesClass: 'split-line',
-      });
+        splitter = new GSAPSplitText(el, {
+          type: splitType,
+          absolute: absoluteLines,
+          linesClass: 'split-line',
+        });
 
-      switch (splitType) {
-        case 'lines':
-          targets = splitter.lines;
-          break;
-        case 'words':
-          targets = splitter.words;
-          break;
-        case 'words, chars':
-          targets = [...splitter.words, ...splitter.chars];
-          break;
-        default:
-          targets = splitter.chars;
-      }
+        switch (splitType) {
+          case 'lines':
+            targets = splitter.lines;
+            break;
+          case 'words':
+            targets = splitter.words;
+            break;
+          case 'words, chars':
+            targets = [...splitter.words, ...splitter.chars];
+            break;
+          default:
+            targets = splitter.chars;
+        }
 
-      targets.forEach(t => {
-        (t as HTMLElement).style.willChange = 'transform, opacity';
-      });
+        targets.forEach(t => {
+          (t as HTMLElement).style.willChange = 'transform, opacity';
+        });
 
-      const startPct = (1 - threshold) * 100;
-      const m = /^(-?\d+)px$/.exec(rootMargin);
-      const raw = m ? parseInt(m[1], 10) : 0;
-      const sign = raw < 0 ? `-=${Math.abs(raw)}px` : `+=${raw}px`;
-      const start = `top ${startPct}%${sign}`;
+        gsap.set(targets, {
+          ...to,
+          clearProps: 'willChange',
+          immediateRender: true,
+        });
 
-      tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: el,
-          start,
-          toggleActions: 'play none none none',
-          once: true,
-        },
-        delay: delay,
-        smoothChildTiming: true,
-        onComplete: () => {
-          animationCompletedRef.current = true;
-          gsap.set(targets, {
-            ...to,
-            clearProps: 'willChange',
-            immediateRender: true,
-          });
-          onLetterAnimationComplete?.();
-        },
-      });
+        const startPct = (1 - threshold) * 100;
+        const m = /^(-?\d+)px$/.exec(rootMargin);
+        const raw = m ? parseInt(m[1], 10) : 0;
+        const sign = raw < 0 ? `-=${Math.abs(raw)}px` : `+=${raw}px`;
+        const start = `top ${startPct}%${sign}`;
 
-      tl.set(targets, { ...from, immediateRender: true, force3D: true });
-      tl.to(targets, {
-        ...to,
+        tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: el,
+            start,
+            toggleActions: 'play none none none',
+            once: true,
+          },
+          delay: delay,
+          smoothChildTiming: true,
+          onComplete: () => {
+            animationCompletedRef.current = true;
+
+            onLetterAnimationComplete?.();
+          },
+        });
+
+        tl.set(targets, { ...from, immediateRender: true, force3D: true });
+        tl.to(targets, {
+          ...to,
+          duration,
+          ease,
+          stagger: stagger / 1000,
+          force3D: true,
+        });
+      };
+
+      // Initial animation creation
+      createAnimation();
+    },
+    {
+      scope: ref,
+      dependencies: [
+        text,
+        delay,
+        stagger,
         duration,
         ease,
-        stagger: stagger / 1000,
-        force3D: true,
-      });
-    };
-
-    const handleVisibilityChange = () => {
-      if (!document.hidden && animationCompletedRef.current) {
-        // Reset animation state when tab becomes visible again
-        animationCompletedRef.current = false;
-
-        // Clean up existing animation
-        if (tl) {
-          tl.kill();
-          ScrollTrigger.getAll().forEach(t => {
-            if (t.trigger === el) t.kill();
-          });
-        }
-        if (targets) {
-          gsap.killTweensOf(targets);
-        }
-        if (splitter) {
-          splitter.revert();
-        }
-
-        // Recreate animation
-        setTimeout(createAnimation, 50); // Small delay to ensure cleanup is complete
-      }
-    };
-
-    // Add visibility change listener
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-
-    // Initial animation creation
-    createAnimation();
-
-    return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-      if (tl) tl.kill();
-      ScrollTrigger.getAll().forEach(t => {
-        if (t.trigger === el) t.kill();
-      });
-      if (targets) gsap.killTweensOf(targets);
-      if (splitter) splitter.revert();
-    };
-  }, [
-    text,
-    delay,
-    stagger,
-    duration,
-    ease,
-    splitType,
-    from,
-    to,
-    threshold,
-    rootMargin,
-    onLetterAnimationComplete,
-  ]);
+        splitType,
+        from,
+        to,
+        threshold,
+        rootMargin,
+        onLetterAnimationComplete,
+      ],
+    }
+  );
 
   return React.createElement(
     Component,

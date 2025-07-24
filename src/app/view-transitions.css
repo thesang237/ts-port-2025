@@ -25,8 +25,7 @@
 
 /* MAIN CONTENT */
 ::view-transition-group(main-content) {
-  /* border-radius: 24px; */
-  @apply rounded-3xl;
+  border-radius: 24px;
   overflow: clip;
 }
 ::view-transition-old(main-content) {
@@ -37,12 +36,6 @@
 }
 
 @keyframes clipIn {
-  /* from {
-    clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
-  }
-  to {
-    clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
-  } */
   from {
     clip-path: inset(100% 0% -20% 0% round 32px);
   }

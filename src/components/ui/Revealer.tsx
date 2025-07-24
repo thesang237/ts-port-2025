@@ -3,13 +3,10 @@
 import { useThemeStore } from '@/store/useThemeStore';
 import { colorOptions } from '@/constants/themeOptions';
 import SplitText from './SplitText';
-import { REVEALER_IN_DURATION } from '@/constants/motion';
 import { cn } from '@/lib/utils';
-// import { useRevealer } from '@/hooks/useRevealer';
 
 export default function Revealer({ title }: { title: string }) {
   const activeColor = useThemeStore(state => state.activeColor);
-  // useRevealer();
 
   return (
     <div
@@ -24,7 +21,7 @@ export default function Revealer({ title }: { title: string }) {
         className={cn(
           'text-background text-5xl leading-[1.2] font-bold tracking-wide uppercase'
         )}
-        delay={REVEALER_IN_DURATION - 0.4}
+        delay={0}
         stagger={25}
         duration={0.3}
         ease='power3.out'

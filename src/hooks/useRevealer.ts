@@ -2,7 +2,7 @@
 
 import {
   REVEALER_ENTER_DURATION,
-  REVEALER_IN_DURATION,
+  CLOSER_DURATION,
   REVEALER_OUT_DURATION,
 } from '@/constants/motion';
 import { useGSAP } from '@gsap/react';
@@ -18,7 +18,7 @@ export function useRevealer() {
       scaleY: 0,
       ease: 'hop',
       duration: REVEALER_OUT_DURATION,
-      delay: REVEALER_IN_DURATION + REVEALER_ENTER_DURATION,
+      delay: CLOSER_DURATION + REVEALER_ENTER_DURATION,
     });
   }, {});
 }

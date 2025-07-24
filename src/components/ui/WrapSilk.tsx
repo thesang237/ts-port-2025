@@ -1,3 +1,5 @@
+'use client';
+
 import { useMemo } from 'react';
 import { useThemeStore } from '@/store/useThemeStore';
 import { getColorHexById } from '@/lib/theme';

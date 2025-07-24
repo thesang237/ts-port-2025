@@ -10,6 +10,8 @@ import SidebarSocialButtons from '@/components/controls/SidebarSocialButtons';
 import ProfileSection from '@/components/ui/ProfileSection';
 import { CircleUser, Briefcase, CodeXml, BookOpen, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useCloser } from '@/hooks/useCloser';
+import { CLOSER_DURATION } from '@/constants/motion';
 
 interface MenuItem {
   label: string;
@@ -30,19 +32,21 @@ const HomeSidebar = React.memo(() => {
   const pathname = usePathname();
   const activeColor = useThemeStore(state => state.activeColor);
   const colorClasses = getColorClasses(activeColor as ColorTheme);
+  const triggerCloser = useCloser();
 
   const navRef = useRef<HTMLElement>(null);
   const menuRefs = useRef<{ [key: string]: HTMLAnchorElement }>({});
 
   // View Transition Navigation
   function triggerPageTransition(href: string) {
-    if ('startViewTransition' in document) {
-      document.startViewTransition(() => {
+    triggerCloser();
+
+    setTimeout(
+      () => {
         router.push(href);
-      });
-    } else {
-      router.push(href);
-    }
+      },
+      (CLOSER_DURATION - 0.2) * 1000
+    );
   }
 
   const handleNavigation =
