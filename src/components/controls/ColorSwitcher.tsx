@@ -19,7 +19,41 @@ const ColorSwitcher: React.FC<ColorSwitcherProps> = React.memo(
           return (
             <button
               key={color.id}
-              onClick={() => onChange(color.id)}
+              onClick={() => {
+                // Change the scrollbar thumb color to the active color
+                if (typeof window !== 'undefined') {
+                  const root = document.documentElement;
+                  // Set a CSS variable for the active color
+                  root.style.setProperty(
+                    '--scrollbar-thumb-color--hover',
+                    color.hex
+                  );
+                  root.style.setProperty(
+                    '--scrollbar-thumb-color',
+                    color.hex.concat('aa')
+                  );
+
+                  // Create a style tag if it doesn't exist
+                  let styleTag = document.getElementById(
+                    'dynamic-scrollbar-thumb'
+                  );
+                  if (!styleTag) {
+                    styleTag = document.createElement('style');
+                    styleTag.id = 'dynamic-scrollbar-thumb';
+                    document.head.appendChild(styleTag);
+                  }
+                  // Set the scrollbar thumb background to the active color
+                  styleTag.innerHTML = `
+                    ::-webkit-scrollbar-thumb {
+                      background: linear-gradient(to top, var(--scrollbar-thumb-color, #ffffff55), #ffffff00);
+                    }
+                    ::-webkit-scrollbar-thumb:hover {
+                      background: linear-gradient(to top, var(--scrollbar-thumb-color--hover, #ffffffaa), #ffffff00);
+                    }
+                  `;
+                }
+                onChange(color.id);
+              }}
               className={cn(
                 'flex size-full items-center justify-center rounded-full transition-all duration-200 hover:scale-110 hover:bg-white/5',
                 isActive ? `ring-2 ${color.ringColor}` : ''

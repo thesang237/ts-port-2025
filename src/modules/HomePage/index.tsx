@@ -13,28 +13,28 @@ export default function HomePage() {
   const getThemeColors = (theme: string) => {
     const colorMap = {
       orange: {
-        primary: 'text-orange-600',
+        primary: 'text-orange-500',
         primaryBg: 'bg-orange-600',
         secondary: 'bg-orange-500',
         tertiary: 'bg-orange-700',
         border: 'border-orange-600',
       },
       violet: {
-        primary: 'text-violet-600',
+        primary: 'text-violet-500',
         primaryBg: 'bg-violet-600',
         secondary: 'bg-violet-500',
         tertiary: 'bg-violet-700',
         border: 'border-violet-600',
       },
       pink: {
-        primary: 'text-pink-600',
+        primary: 'text-pink-500',
         primaryBg: 'bg-pink-600',
         secondary: 'bg-pink-500',
         tertiary: 'bg-pink-700',
         border: 'border-pink-600',
       },
       green: {
-        primary: 'text-green-600',
+        primary: 'text-green-500',
         primaryBg: 'bg-green-600',
         secondary: 'bg-green-500',
         tertiary: 'bg-green-700',
@@ -106,7 +106,7 @@ export default function HomePage() {
                   }}
                 ></div>
               </div>
-              <p className='flex-1 text-2xl leading-[1.5] text-black'>
+              <p className='flex-1 text-2xl leading-[1.5]'>
                 I design user-centric, visually stunning, and interactive
                 interfaces that bring value to both businesses and users.
               </p>
@@ -128,7 +128,7 @@ export default function HomePage() {
               </h2>
             </div>
             <div className='pl-40'>
-              <p className='leading-relaxed text-gray-800'>
+              <p className='leading-relaxed'>
                 With over 5 years of experience as a full-time designer and
                 freelancer, I specialize in creating intuitive and engaging user
                 interfaces that not only look great but also deliver real value
@@ -159,7 +159,7 @@ export default function HomePage() {
             <div className='space-y-8 pl-40'>
               {/* Design Skills */}
               <div className='space-y-2'>
-                <h3 className='text-sm font-bold tracking-wider text-stone-600 uppercase'>
+                <h3 className='text-sm font-bold tracking-wider uppercase'>
                   Design
                 </h3>
                 <div className='space-y-2'>
@@ -196,7 +196,7 @@ export default function HomePage() {
 
               {/* Development Skills */}
               <div className='space-y-2'>
-                <h3 className='text-sm font-bold tracking-wider text-stone-600 uppercase'>
+                <h3 className='text-sm font-bold tracking-wider uppercase'>
                   Development
                 </h3>
                 <div className='space-y-2'>
@@ -233,7 +233,7 @@ export default function HomePage() {
 
               {/* Creative Coding Skills */}
               <div className='space-y-2'>
-                <h3 className='text-sm font-bold tracking-wider text-stone-600 uppercase'>
+                <h3 className='text-sm font-bold tracking-wider uppercase'>
                   Creative Coding
                 </h3>
                 <div className='space-y-2'>
@@ -284,8 +284,8 @@ export default function HomePage() {
             <div className='space-y-4'>
               <div className='flex flex-col items-start gap-2'>
                 <div className='space-y-2'>
-                  <p className='text-sm font-bold tracking-wider text-stone-600 uppercase'>
-                    2023 - Present
+                  <p className='text-sm font-bold tracking-wider uppercase'>
+                    2023 → Present
                   </p>
                   <h3
                     className={cn('text-xl font-medium', themeColors.primary)}
@@ -295,14 +295,14 @@ export default function HomePage() {
                 </div>
                 <span
                   className={cn(
-                    'mt-1 rounded-full px-3 py-1 text-sm font-bold text-white',
+                    'mt-1 rounded-full px-3 py-1 text-sm font-bold',
                     themeColors.secondary
                   )}
                 >
                   Autonomous Inc.
                 </span>
               </div>
-              <div className='space-y-1 text-gray-800'>
+              <div className='space-y-1'>
                 <p>
                   • Brainstorm and develop generative art collection on
                   blockchain using creative coding tools and languages like
@@ -326,8 +326,8 @@ export default function HomePage() {
             <div className='space-y-4'>
               <div className='flex flex-col items-start gap-2'>
                 <div className='space-y-2'>
-                  <p className='text-sm font-bold tracking-wider text-stone-600 uppercase'>
-                    2022 - 2023
+                  <p className='text-sm font-bold tracking-wider uppercase'>
+                    2022 → 2023
                   </p>
                   <h3
                     className={cn('text-xl font-medium', themeColors.primary)}
@@ -337,14 +337,14 @@ export default function HomePage() {
                 </div>
                 <span
                   className={cn(
-                    'mt-1 rounded-full px-3 py-1 text-sm font-bold text-white',
+                    'mt-1 rounded-full px-3 py-1 text-sm font-bold',
                     themeColors.secondary
                   )}
                 >
                   Extracy Inc.
                 </span>
               </div>
-              <div className='space-y-1 text-gray-800'>
+              <div className='space-y-1'>
                 <p>
                   • Analyze PO&apos;s requirements of blockchain app features
                 </p>
@@ -367,8 +367,8 @@ export default function HomePage() {
             <div className='space-y-4'>
               <div className='flex flex-col items-start gap-2'>
                 <div className='space-y-2'>
-                  <p className='text-sm font-bold tracking-wider text-stone-600 uppercase'>
-                    2020 - 2022
+                  <p className='text-sm font-bold tracking-wider uppercase'>
+                    2020 → 2022
                   </p>
                   <h3
                     className={cn('text-xl font-medium', themeColors.primary)}
@@ -378,14 +378,14 @@ export default function HomePage() {
                 </div>
                 <span
                   className={cn(
-                    'mt-1 rounded-full px-3 py-1 text-sm font-bold text-white',
+                    'mt-1 rounded-full px-3 py-1 text-sm font-bold',
                     themeColors.secondary
                   )}
                 >
                   Solazu Technology
                 </span>
               </div>
-              <div className='space-y-1 text-gray-800'>
+              <div className='space-y-1'>
                 <p>• Support senior in applying design language & system</p>
                 <p>• Draft wireframes & final mockups for new features</p>
                 <p>• Support developers in UI building & testing</p>
@@ -397,7 +397,7 @@ export default function HomePage() {
             <div className='space-y-4'>
               <div className='flex flex-col items-start gap-2'>
                 <div className='space-y-2'>
-                  <p className='text-sm font-bold tracking-wider text-stone-600 uppercase'>
+                  <p className='text-sm font-bold tracking-wider uppercase'>
                     2020 → Present
                   </p>
                   <h3
@@ -408,14 +408,14 @@ export default function HomePage() {
                 </div>
                 <span
                   className={cn(
-                    'mt-1 rounded-full px-3 py-1 text-sm font-bold text-white',
+                    'mt-1 rounded-full px-3 py-1 text-sm font-bold',
                     themeColors.secondary
                   )}
                 >
                   Freelance
                 </span>
               </div>
-              <div className='space-y-1 text-gray-800'>
+              <div className='space-y-1'>
                 <p>
                   • Conduct extensive research on client&apos;s problems & needs
                   in order to provide tailored visual solutions for web and

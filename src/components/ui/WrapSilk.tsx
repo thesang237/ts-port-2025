@@ -21,7 +21,8 @@ export default function WrapSilk() {
 
   return (
     <div className='fixed inset-0 z-0'>
-      <Silk {...silkProps} />
+      {/* <Silk {...silkProps} /> */}
+      <Silk key={activeColor} {...silkProps} />
     </div>
   );
 }

@@ -34,9 +34,6 @@ const HomeSidebar = React.memo(() => {
   const colorClasses = getColorClasses(activeColor as ColorTheme);
   const triggerCloser = useCloser();
 
-  const navRef = useRef<HTMLElement>(null);
-  const menuRefs = useRef<{ [key: string]: HTMLAnchorElement }>({});
-
   // View Transition Navigation
   function triggerPageTransition(href: string) {
     triggerCloser();
@@ -70,20 +67,15 @@ const HomeSidebar = React.memo(() => {
           <SidebarSocialButtons />
         </div>
 
-        <nav
-          ref={navRef}
-          className='glass-sidebar relative col-span-2 space-y-1 p-2'
-        >
+        <nav className='glass-sidebar relative col-span-2 space-y-1 p-2'>
           {menuItems.map(({ slug, label, icon: Icon }) => {
-            const isActive = pathname === slug;
+            const isActive =
+              slug === '/' ? pathname === slug : pathname.includes(slug);
 
             return (
               <Link
                 key={slug}
                 href={slug}
-                ref={el => {
-                  if (el) menuRefs.current[slug] = el;
-                }}
                 onClick={handleNavigation(slug)}
                 className={cn(
                   'relative flex h-12 w-full items-center gap-3 rounded-full px-4 py-3 text-left transition-colors duration-200',

@@ -2,8 +2,10 @@
 /* @import './view-transitions.css'; */
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* --background: #ffffff;
+  --foreground: #171717; */
+  --background: #171717;
+  --foreground: #ffffff;
   --font-adobe: 'new-science', serif;
   --font-adobe-extended: 'new-science-extended', serif;
   /* Glass Background Variants */
@@ -41,6 +43,10 @@
   --glass-blur-md: 16px;
   --glass-blur-lg: 24px;
   --glass-blur-xl: 32px;
+
+  /* Height */
+  --header-height-desktop: 48px;
+  --footer-height-desktop: 48px;
 }
 
 @theme inline {
@@ -69,20 +75,20 @@
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #00000022;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
+  background: linear-gradient(to top, #ffffff55, #ffffff00);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
+  background: linear-gradient(to top, #ffffffaa, #ffffff00);
 }
 
 /* Smooth scrolling for browsers that don't support it natively */
@@ -273,6 +279,12 @@ a:focus-visible {
   box-shadow: var(--glass-shadow-xl);
   overflow: hidden;
 }
+.glass-projects-sidebar {
+  border-radius: var(--glass-border-radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: linear-gradient(to bottom, #00000088, #00000000, #00000033);
+  overflow: hidden;
+}
 
 .glass-footer {
   background: rgba(0, 0, 0, 0.7);
@@ -283,11 +295,10 @@ a:focus-visible {
 }
 
 .glass-content {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.25);
-  /* outline: 1px solid rgba(255, 255, 255, 0.25);
-  outline-offset: 0px; pushes it outward */
-  -webkit-backdrop-filter: blur(var(--glass-blur-xl));
-  backdrop-filter: blur(var(--glass-blur-xl));
+  -webkit-backdrop-filter: blur(64px);
+  backdrop-filter: blur(64px);
+  /* backdrop-filter: blur(var(--glass-blur-xl)); */
   /* box-shadow: var(--glass-shadow-sm); */
 }

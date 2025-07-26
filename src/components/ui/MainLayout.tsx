@@ -29,7 +29,7 @@ const PortfolioLayout: React.FC<PortfolioLayoutProps> = React.memo(
           <WrapSilk />
 
           {/* Fixed Navigation Bar - Now with glass-nav class */}
-          <nav className='fixed top-0 right-0 left-0 z-50 h-12'>
+          <nav className='fixed top-0 right-0 left-0 z-50 h-[var(--header-height-desktop)]'>
             <div className='glass-nav flex h-full items-center justify-between px-6'>
               <div className='text-lg font-bold text-gray-50 uppercase'>
                 Portfolio
@@ -63,7 +63,7 @@ const PortfolioLayout: React.FC<PortfolioLayoutProps> = React.memo(
           </div>
 
           {/* Fixed Footer Bar - Now with glass-footer class */}
-          <footer className='fixed right-0 bottom-0 left-0 z-50 h-12'>
+          <footer className='fixed right-0 bottom-0 left-0 z-50 h-[var(--footer-height-desktop)]'>
             <div className='glass-footer flex h-full items-center justify-between !px-6 text-white'>
               <div className='bg-blue-500/0 text-sm'>© 2025</div>
               <div className='flex items-center gap-2 space-x-4 text-sm'>
