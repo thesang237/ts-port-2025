@@ -4,16 +4,23 @@ import { useThemeStore } from '@/store/useThemeStore';
 import { colorOptions } from '@/constants/themeOptions';
 import SplitText from './SplitText';
 import { cn } from '@/lib/utils';
+import { useRevealer } from '@/hooks/useRevealer';
 
 export default function Revealer({ title }: { title: string }) {
   const activeColor = useThemeStore(state => state.activeColor);
+  const hasHydrated = useThemeStore(state => state.hasHydrated);
+
+  const bgColor = hasHydrated
+    ? colorOptions.find(color => color.id === activeColor)?.hex
+    : 'var(--background)';
+
+  useRevealer();
 
   return (
     <div
       className='revealer pointer-events-none absolute top-0 left-0 z-20 grid h-full w-full origin-top place-content-center'
       style={{
-        backgroundColor: colorOptions.find(color => color.id === activeColor)
-          ?.hex,
+        backgroundColor: bgColor,
       }}
     >
       <SplitText

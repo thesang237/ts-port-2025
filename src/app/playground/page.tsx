@@ -13,7 +13,7 @@ export default function Playground() {
       <Revealer title='Playground' />
       <div className='playground-page'>
         <div className='header'>
-          <h1>Projects</h1>
+          <h1>Playground</h1>
         </div>
       </div>
     </>

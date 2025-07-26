@@ -15,7 +15,7 @@ const ProjectsLayout = ({ children }: { children: React.ReactNode }) => {
       <ProjectsSidebar />
 
       {/* Right Panel: Conditional Content */}
-      <main className='projects-content col-span-7 col-start-3 bg-red-300/50'>
+      <main className='projects-content col-span-7 col-start-3 bg-red-300/0'>
         {children}
       </main>
     </div>

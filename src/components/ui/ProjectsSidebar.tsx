@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ColorTheme, useThemeStore } from '@/store/useThemeStore';
-import { aside } from 'framer-motion/client';
 
 const filters = [
   { id: 'all', label: 'All Projects' },
@@ -45,7 +44,7 @@ export default function ProjectsSidebar() {
                   layoutId='active-filter-bg'
                   className={cn(
                     'pointer-events-none absolute top-0 left-0 z-0 h-full w-full rounded-full',
-                    colorClasses.bg
+                    colorClasses?.bgColor
                   )}
                 />
               ) : null}

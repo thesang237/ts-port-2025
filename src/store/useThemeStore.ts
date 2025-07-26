@@ -7,16 +7,23 @@ export type ColorTheme = 'orange' | 'violet' | 'pink' | 'green';
 type ThemeState = {
   activeColor: string;
   setActiveColor: (color: string) => void;
+  hasHydrated: boolean;
+  setHasHydrated: (state: boolean) => void;
 };
 
 export const useThemeStore = create<ThemeState>()(
   persist(
     set => ({
-      activeColor: 'orange', // default value
+      activeColor: 'violet',
       setActiveColor: color => set({ activeColor: color }),
+      hasHydrated: false,
+      setHasHydrated: state => set({ hasHydrated: state }),
     }),
     {
-      name: 'theme-storage', // key in localStorage
+      name: 'theme-storage',
+      onRehydrateStorage: () => state => {
+        state?.setHasHydrated(true);
+      },
     }
   )
 );

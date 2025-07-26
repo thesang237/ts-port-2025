@@ -87,7 +87,7 @@ const HomeSidebar = React.memo(() => {
                     layoutId='active-menu-bg'
                     className={cn(
                       'pointer-events-none absolute top-0 left-0 z-0 h-full w-full rounded-full',
-                      colorClasses.bg
+                      colorClasses?.bgColor
                     )}
                   />
                 ) : null}
