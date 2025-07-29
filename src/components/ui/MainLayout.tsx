@@ -8,9 +8,9 @@ const HomeSidebar = dynamic(() => import('./HomeSidebar'), {
   ssr: false,
   loading: () => <div className='p-4'>Loading...</div>,
 });
-// import WrapSilk from './WrapSilk';
+
 import { ToastProvider } from '@/components/ui/ToastProvider';
-import MainBackground from './MainBackground';
+// import MainBackground from './MainBackground';
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -23,7 +23,7 @@ const MainLayout: React.FC<MainLayoutProps> = React.memo(({ children }) => {
       <div className='h-screen w-screen overflow-hidden scroll-smooth bg-gray-950'>
         {/* Fixed Fullscreen Background Layer */}
         {/* <WrapSilk /> */}
-        <MainBackground />
+        {/* <MainBackground /> */}
 
         {/* Fixed Navigation Bar - Now with glass-nav class */}
         <nav className='fixed top-0 right-0 left-0 z-50 h-[var(--header-height-desktop)]'>
@@ -49,10 +49,7 @@ const MainLayout: React.FC<MainLayoutProps> = React.memo(({ children }) => {
           </aside>
 
           {/* Main Content Section - Now with glass-content class */}
-          <section
-            style={{ viewTransitionName: 'main-content' }}
-            className='glass-content relative col-span-9 flex flex-col overflow-hidden rounded-3xl'
-          >
+          <section className='glass-content relative col-span-9 flex flex-col overflow-hidden rounded-3xl'>
             <div className='flex-1 overflow-y-auto bg-red-500/0'>
               {children}
             </div>

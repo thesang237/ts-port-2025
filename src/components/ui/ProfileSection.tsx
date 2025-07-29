@@ -4,16 +4,6 @@ import { ColorTheme, useThemeStore } from '@/store/useThemeStore';
 import RotatingText from '../ui/RotatingText';
 import { cn, getColorClasses } from '@/lib/utils';
 
-const getColorHexById = (theme: string) => {
-  const colorMap = {
-    orange: '#ea580c',
-    violet: '#8e51ff',
-    pink: '#db2777',
-    green: '#16a34a',
-  };
-  return colorMap[theme as keyof typeof colorMap] || '#ea580c';
-};
-
 export default function ProfileSection() {
   const activeColor = useThemeStore(state => state.activeColor);
   const colorClasses = getColorClasses(activeColor as ColorTheme);

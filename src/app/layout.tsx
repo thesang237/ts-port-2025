@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { ViewTransitions } from 'next-view-transitions';
 import MainLayout from '@/components/ui/MainLayout';
+import WrapSilk from '@/components/ui/WrapSilk';
 
 export const metadata: Metadata = {
   title: 'The Sang - Product Designer',
@@ -48,6 +49,7 @@ export default function RootLayout({
           <link rel='stylesheet' href='https://use.typekit.net/xxe4rcd.css' />
         </head>
         <body className='overflow-x-hidden bg-white font-sans text-gray-900 antialiased'>
+          <WrapSilk />
           <MainLayout>{children}</MainLayout>
         </body>
       </html>

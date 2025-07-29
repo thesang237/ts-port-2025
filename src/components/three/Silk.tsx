@@ -21,9 +21,17 @@ const hexToNormalizedRGB = (hex: string): NormalizedRGB => {
 };
 
 const getNearColorHex = (hex: string): string => {
+  // switch (hex.toLowerCase()) {
+  //   case '#78716c':
+  //     return '#78716c'; // dark -> darker
+  //   case '##fafaf9':
+  //     return '##d6d3d1'; // light → lighter
+  //   default:
+  //     return '#facc15'; // fallback to dark
+  // }
   switch (hex.toLowerCase()) {
     case '#ea580c':
-      return '#facc15'; // orange → yellow
+      return '#fa9715'; // orange → yellow
     case '#16a34a':
       return '#007949'; // green → blue
     case '#db2777':
@@ -192,7 +200,7 @@ const Silk: React.FC<SilkProps> = React.memo(
   ({
     speed = 5,
     scale = 1,
-    color = '#7B7481',
+    color = '#0c0a09',
     noiseIntensity = 1.5,
     rotation = 0,
   }) => {

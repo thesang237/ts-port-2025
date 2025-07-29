@@ -3,6 +3,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 export type ColorTheme = 'orange' | 'violet' | 'pink' | 'green';
+// export type ColorTheme = 'light' | 'dark';
 
 type ThemeState = {
   activeColor: string;
@@ -14,7 +15,8 @@ type ThemeState = {
 export const useThemeStore = create<ThemeState>()(
   persist(
     set => ({
-      activeColor: 'violet',
+      activeColor: 'orange',
+      // activeColor: 'dark',
       setActiveColor: color => set({ activeColor: color }),
       hasHydrated: false,
       setHasHydrated: state => set({ hasHydrated: state }),
