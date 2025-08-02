@@ -16,7 +16,7 @@ const filters = [
 ];
 
 export default function ProjectsSidebar() {
-  const handleFilterClick = (filter: string) => {};
+  // const handleFilterClick = (filter: string) => {};
   const pathname = usePathname();
   const activeColor = useThemeStore(state => state.activeColor);
   const colorClasses = getColorClasses(activeColor as ColorTheme);
