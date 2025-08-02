@@ -10,7 +10,10 @@ export default function ProjectsLayoutRoot({
 
 const ProjectsLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className='projects-layout grid min-h-screen grid-cols-9 gap-6 bg-black/30 pr-6 backdrop-blur-3xl'>
+    <div
+      id='projects-layout'
+      className='grid h-full grid-cols-9 gap-6 overflow-y-hidden bg-black/30 pr-6 backdrop-blur-3xl'
+    >
       {/* Left Panel: Filter Sidebar */}
       <ProjectsSidebar />
 

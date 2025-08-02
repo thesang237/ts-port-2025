@@ -11,10 +11,12 @@ export default function Projects() {
       <Revealer title='Projects' />
       <div className='projects-page'>
         <div className='header mb-8'>
-          <h1 className='text-3xl font-bold text-white mb-2'>Projects</h1>
-          <p className='text-stone-400'>Explore my latest work across different categories</p>
+          <h1 className='mb-2 text-3xl font-bold text-white'>Projects</h1>
+          <p className='text-stone-400'>
+            Explore my latest work across different categories
+          </p>
         </div>
-        <ProjectList filter="all" />
+        <ProjectList filter='all' />
       </div>
     </>
   );

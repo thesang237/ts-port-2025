@@ -10,6 +10,11 @@ export default function Revealer({ title }: { title: string }) {
   const activeColor = useThemeStore(state => state.activeColor);
   const hasHydrated = useThemeStore(state => state.hasHydrated);
 
+  // const projectsLayout = document.querySelector(
+  //   '.projects-layout'
+  // ) as HTMLElement | null;
+  // projectsLayout && (projectsLayout.style.overflow = 'hidden');
+
   const bgColor = hasHydrated
     ? colorOptions.find(color => color.id === activeColor)?.hex
     : 'var(--background)';

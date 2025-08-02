@@ -1,17 +1,22 @@
 'use client';
 
+import DetailProjectWrapper from '@/components/ui/DetailProjectWrapper';
 import ProjectList from '@/components/ui/ProjectList';
 
 export default function Branding() {
   return (
     <>
-      <div className='project-detail-page'>
+      <DetailProjectWrapper>
         <div className='header mb-8'>
-          <h1 className='text-3xl font-bold text-white mb-2'>Branding Projects</h1>
-          <p className='text-stone-400'>Brand identity and visual design work</p>
+          <h1 className='mb-2 text-3xl font-bold text-white'>
+            Branding Projects
+          </h1>
+          <p className='text-stone-400'>
+            Brand identity and visual design work
+          </p>
         </div>
-        <ProjectList filter="branding" />
-      </div>
+        <ProjectList filter='branding' />
+      </DetailProjectWrapper>
     </>
   );
 }
