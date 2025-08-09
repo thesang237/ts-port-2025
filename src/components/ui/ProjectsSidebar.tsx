@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 import { ColorTheme, useThemeStore } from '@/store/useThemeStore';
 
 const filters = [
-  { id: 'all', label: 'All Projects' },
+  // { id: 'all', label: 'All Projects' },
   { id: 'application', label: 'Application' },
   { id: 'landing', label: 'Landing' },
   { id: 'branding', label: 'Branding' },
@@ -26,19 +26,13 @@ export default function ProjectsSidebar() {
       <nav className='glass-projects-sidebar col-span-2 h-full space-y-1 p-2'>
         {filters.map(({ id, label }) => {
           const isActive =
-            id === 'all'
-              ? pathname === '/projects'
-              : pathname === `/projects/${id}`;
+            pathname === `/projects/${id}` ||
+            (pathname === '/projects' && id === 'application');
 
-          return (
-            <Link
-              key={id}
-              href={id === 'all' ? '/projects' : `/projects/${id}`}
-              className={cn(
-                'relative flex h-12 w-full items-center gap-3 rounded-full px-4 py-3 text-left transition-colors duration-200',
-                isActive && 'z-10'
-              )}
-            >
+          const linkHref = id === 'all' ? '/projects' : `/projects/${id}`;
+
+          const content = (
+            <>
               {isActive ? (
                 <motion.div
                   layoutId='active-filter-bg'
@@ -56,6 +50,25 @@ export default function ProjectsSidebar() {
               >
                 {label}
               </span>
+            </>
+          );
+
+          return (
+            <Link
+              key={id}
+              href={linkHref}
+              aria-current={isActive ? 'page' : undefined}
+              onClick={e => {
+                if (isActive) {
+                  e.preventDefault();
+                }
+              }}
+              className={cn(
+                'relative flex h-12 w-full items-center gap-3 rounded-full px-4 py-3 text-left transition-colors duration-200',
+                isActive && 'z-10'
+              )}
+            >
+              {content}
             </Link>
           );
         })}
