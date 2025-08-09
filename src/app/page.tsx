@@ -1,5 +1,3 @@
-'use client';
-
 import Closer from '@/components/ui/Closer';
 import dynamic from 'next/dynamic';
 

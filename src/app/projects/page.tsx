@@ -1,5 +1,3 @@
-'use client';
-
 import Closer from '@/components/ui/Closer';
 import Revealer from '@/components/ui/Revealer';
 import ProjectList from '@/components/ui/ProjectList';

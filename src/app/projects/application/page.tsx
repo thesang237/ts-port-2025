@@ -1,5 +1,3 @@
-'use client';
-
 import DetailProjectWrapper from '@/components/ui/DetailProjectWrapper';
 import ProjectList from '@/components/ui/ProjectList';
 
