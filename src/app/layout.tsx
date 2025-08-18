@@ -42,17 +42,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ViewTransitions>
-      <html lang='en'>
-        <head>
-          {/* Adobe Fonts */}
-          <link rel='stylesheet' href='https://use.typekit.net/xxe4rcd.css' />
-        </head>
-        <body className='overflow-x-hidden bg-white font-sans text-gray-900 antialiased'>
-          <WrapSilk />
-          <MainLayout>{children}</MainLayout>
-        </body>
-      </html>
-    </ViewTransitions>
+    // <ViewTransitions>
+    <html lang='en'>
+      <head>
+        {/* Adobe Fonts */}
+        <link rel='stylesheet' href='https://use.typekit.net/xxe4rcd.css' />
+      </head>
+      <body className='overflow-x-hidden bg-white font-sans text-gray-900 antialiased'>
+        <WrapSilk />
+        <MainLayout>{children}</MainLayout>
+      </body>
+    </html>
+    // </ViewTransitions>
   );
 }
