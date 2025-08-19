@@ -1,7 +1,10 @@
-export {}; // Ensure this is a module
-
 declare global {
   interface Document {
-    startViewTransition(callback: () => void): ViewTransition;
+    startViewTransition?: (cb: () => void | Promise<void>) => {
+      finished: Promise<void>;
+      ready: Promise<void>;
+      updateCallbackDone: Promise<void>;
+    };
   }
 }
+export {};

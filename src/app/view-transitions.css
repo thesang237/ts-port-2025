@@ -1,45 +1,51 @@
-::view-transition-old(root),
+@view-transition {
+  navigation: auto;
+}
+
+/* 3. Animation timing */
+
+::view-transition-group(*) {
+  animation-duration: 350ms;
+}
+
+/* Base animation for route cross‑fades */
+/* ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation: none !important;
+  animation-duration: 350ms;
+  animation-timing-function: cubic-bezier(0.2, 0.65, 0.25, 1);
 }
-
-::view-transition-group(root) {
-  z-index: auto !important;
-}
-
-::view-transition-image-pair(root) {
-  isolation: isolate;
-  will-change: clip-path;
-  z-index: 1;
-}
-
-::view-transition-new(root) {
-  z-index: 100000;
-  animation: none !important;
-}
-
-::view-transition-old(root) {
-  z-index: 1;
-  animation: none !important;
-}
-
-/* MAIN CONTENT */
-::view-transition-group(main-content) {
-  border-radius: 24px;
+::view-transition-group(*) {
+  animation-duration: 0.5s;
+}  */
+/* Respect reduced motion */
+/* @media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-image-pair(*),
+  ::view-transition-new(*),
+  ::view-transition-old(*) {
+    animation: none !important;
+  }
+} */
+::view-transition-old(eternal-wallet-banner),
+::view-transition-new(eternal-wallet-banner) {
+  animation: none;
+  mix-blend-mode: normal;
+  height: 100%;
   overflow: clip;
-}
-::view-transition-old(main-content) {
-  animation: none !important;
-}
-::view-transition-new(main-content) {
-  animation: clipIn 0.7s cubic-bezier(0.9, 0, 0.1, 1);
+  /* animation-duration: 1000ms; */
+  border-radius: 2rem;
 }
 
-@keyframes clipIn {
-  from {
-    clip-path: inset(100% 0% -20% 0% round 32px);
-  }
-  to {
-    clip-path: inset(0% 0% 0% 0% round 32px);
-  }
+#project-eternal-wallet::view-transition-new(eternal-wallet-banner) {
+  object-fit: cover;
+}
+
+#projects-layout::view-transition-new(eternal-wallet-banner) {
+  object-fit: contain;
+}
+#projects-layout::view-transition-old(eternal-wallet-banner) {
+  object-fit: cover;
+}
+::view-transition-group(eternal-wallet-banner) {
+  z-index: 1;
 }

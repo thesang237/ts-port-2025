@@ -5,6 +5,8 @@ import { easeInOut, easeOut, motion, Variants } from 'framer-motion';
 import { Project, ProjectFilter } from '@/types/projects';
 import { getProjectsByCategory } from '@/data/projects';
 import { ColorTheme, useThemeStore } from '@/store/useThemeStore';
+import Link from 'next/link';
+import { unstable_ViewTransition as ViewTransition } from 'react';
 
 interface ProjectListProps {
   filter: ProjectFilter;
@@ -67,15 +69,29 @@ interface ProjectCardProps {
   colorClasses: ReturnType<typeof getColorClasses> | undefined;
 }
 
+const MotionLink = motion(Link);
+
 function ProjectCard({ project, colorClasses }: ProjectCardProps) {
   return (
-    <motion.div
+    // <motion.div variants={itemVariants}>
+    <MotionLink
       variants={itemVariants}
-      className='group relative overflow-hidden rounded-2xl border border-stone-800/50 bg-stone-900/50 backdrop-blur-sm transition-none duration-300 hover:border-stone-700/50'
+      href={`/projects/application/${project.id}`}
+      className='group relative overflow-hidden rounded-4xl border border-stone-800/50 bg-stone-900/50 backdrop-blur-sm transition-none duration-300 hover:border-stone-700/50'
     >
       {/* Project Image Placeholder */}
       <div className='relative aspect-video overflow-hidden bg-gradient-to-br from-stone-800 to-stone-900'>
-        <div className='absolute inset-0 bg-gradient-to-t from-black/50 to-transparent' />
+        <div className='absolute inset-0 bg-gradient-to-t from-black/50 to-transparent'>
+          {project.image && (
+            <ViewTransition name={`${project.id}-banner`}>
+              <img
+                src={project.image}
+                alt={project.title}
+                className='h-auto w-full rounded-4xl object-cover'
+              />
+            </ViewTransition>
+          )}
+        </div>
         <div className='absolute right-4 bottom-4 left-4'>
           <h3 className='mb-1 text-lg font-semibold text-white'>
             {project.title}
@@ -157,6 +173,7 @@ function ProjectCard({ project, colorClasses }: ProjectCardProps) {
 
       {/* Hover Effect */}
       <div className='pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100' />
-    </motion.div>
+    </MotionLink>
+    // </motion.div>
   );
 }

@@ -4,7 +4,6 @@ import { useMemo } from 'react';
 import { useThemeStore } from '@/store/useThemeStore';
 import { getColorHexById } from '@/lib/theme';
 import Silk from '@/components/three/Silk';
-import { canvas } from 'framer-motion/client';
 
 export default function WrapSilk() {
   const activeColor = useThemeStore(state => state.activeColor);
