@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { cn, getColorClasses } from '@/lib/utils';
@@ -12,6 +12,8 @@ import { CircleUser, Briefcase, CodeXml, BookOpen, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useCloser } from '@/hooks/useCloser';
 import { CLOSER_DURATION } from '@/constants/motion';
+import { unstable_ViewTransition as ViewTransition } from 'react';
+import { useCollapsedUI } from '@/hooks/useCollapsedUI';
 
 interface MenuItem {
   label: string;
@@ -33,6 +35,7 @@ const HomeSidebar = React.memo(() => {
   const activeColor = useThemeStore(state => state.activeColor);
   const colorClasses = getColorClasses(activeColor as ColorTheme);
   const triggerCloser = useCloser();
+  const isCollapsedUI = useCollapsedUI();
 
   // View Transition Navigation
   function triggerPageTransition(href: string) {
@@ -62,57 +65,70 @@ const HomeSidebar = React.memo(() => {
       <ProfileSection />
 
       <div className='grid grid-cols-3 gap-6'>
-        <div className='col-span-1 flex flex-col gap-6'>
-          <ColorSwitcherWrapper />
-          <SidebarSocialButtons />
-        </div>
+        <ViewTransition name='vt-sidebar-controls'>
+          <div
+            className={cn(
+              'h-auto flex-col gap-6',
+              isCollapsedUI ? 'hidden' : 'col-span-1 flex'
+            )}
+          >
+            <ColorSwitcherWrapper />
+            <SidebarSocialButtons />
+          </div>
+        </ViewTransition>
+        <ViewTransition name='vt-sidebar-menu'>
+          <nav
+            className={cn(
+              'glass-sidebar relative space-y-1 p-2',
+              isCollapsedUI ? 'col-span-3' : 'col-span-2'
+            )}
+          >
+            {menuItems.map(({ slug, label, icon: Icon }) => {
+              const isActive =
+                slug === '/' ? pathname === slug : pathname.includes(slug);
 
-        <nav className='glass-sidebar relative col-span-2 space-y-1 p-2'>
-          {menuItems.map(({ slug, label, icon: Icon }) => {
-            const isActive =
-              slug === '/' ? pathname === slug : pathname.includes(slug);
-
-            return (
-              <Link
-                key={slug}
-                href={slug}
-                onClick={handleNavigation(slug)}
-                className={cn(
-                  'group relative flex h-12 w-full items-center gap-3 rounded-full px-4 py-3 text-left transition-all ease-out duration-200 ',
-                  isActive ? 'z-10' : 'hover:bg-white/5'
-                )}
-              >
-                {isActive ? (
-                  <motion.div
-                    layoutId='active-menu-bg'
-                    className={cn(
-                      'pointer-events-none absolute top-0 left-0 z-0 h-full w-full rounded-full',
-                      colorClasses?.bgColor
-                    )}
-                  />
-                ) : null}
-
-                <Icon
-                  size={24}
+              return (
+                <Link
+                  key={slug}
+                  href={slug}
+                  onClick={handleNavigation(slug)}
                   className={cn(
-                    'z-1 transition-colors duration-200 group-hover:text-white',
-                    isActive ? 'text-white' : 'text-stone-300'
-                  )}
-                />
-                <span
-                  className={cn(
-                    'z-1 transition-colors duration-200 group-hover:text-white',
-                    isActive
-                      ? 'text-white'
-                      : 'text-stone-300 hover:text-stone-50'
+                    'group relative flex h-12 w-full items-center gap-3 rounded-full px-4 py-3 text-left transition-all duration-200 ease-out',
+                    isActive ? 'z-10' : 'hover:bg-white/5'
                   )}
                 >
-                  {label}
-                </span>
-              </Link>
-            );
-          })}
-        </nav>
+                  {isActive ? (
+                    <motion.div
+                      layoutId='active-menu-bg'
+                      className={cn(
+                        'pointer-events-none absolute top-0 left-0 z-0 h-full w-full rounded-full',
+                        colorClasses?.bgColor
+                      )}
+                    />
+                  ) : null}
+
+                  <Icon
+                    size={24}
+                    className={cn(
+                      'z-1 transition-colors duration-200 group-hover:text-white',
+                      isActive ? 'text-white' : 'text-stone-300'
+                    )}
+                  />
+                  <span
+                    className={cn(
+                      'z-1 transition-colors duration-200 group-hover:text-white',
+                      isActive
+                        ? 'text-white'
+                        : 'text-stone-300 hover:text-stone-50'
+                    )}
+                  >
+                    {label}
+                  </span>
+                </Link>
+              );
+            })}
+          </nav>
+        </ViewTransition>
       </div>
     </div>
   );

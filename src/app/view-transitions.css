@@ -3,29 +3,10 @@
 }
 
 /* 3. Animation timing */
-
 ::view-transition-group(*) {
   animation-duration: 350ms;
 }
 
-/* Base animation for route cross‑fades */
-/* ::view-transition-old(root),
-::view-transition-new(root) {
-  animation-duration: 350ms;
-  animation-timing-function: cubic-bezier(0.2, 0.65, 0.25, 1);
-}
-::view-transition-group(*) {
-  animation-duration: 0.5s;
-}  */
-/* Respect reduced motion */
-/* @media (prefers-reduced-motion: reduce) {
-  ::view-transition-group(*),
-  ::view-transition-image-pair(*),
-  ::view-transition-new(*),
-  ::view-transition-old(*) {
-    animation: none !important;
-  }
-} */
 ::view-transition-old(eternal-wallet-banner),
 ::view-transition-new(eternal-wallet-banner) {
   animation: none;

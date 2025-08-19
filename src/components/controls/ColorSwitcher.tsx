@@ -12,7 +12,12 @@ interface ColorSwitcherProps {
 const ColorSwitcher: React.FC<ColorSwitcherProps> = React.memo(
   ({ activeColor, onChange }) => {
     return (
-      <div className='glass-sidebar grid flex-1 grid-cols-2 grid-rows-2 place-items-center gap-2 p-2'>
+      <div
+        className={cn(
+          'glass-sidebar grid h-auto grid-cols-2 grid-rows-2 place-items-center gap-2 p-2',
+          '3xl:gap-4 3xl:p-4'
+        )}
+      >
         {colorOptions.map(color => {
           const isActive = activeColor === color.id;
 
@@ -55,7 +60,7 @@ const ColorSwitcher: React.FC<ColorSwitcherProps> = React.memo(
                 onChange(color.id);
               }}
               className={cn(
-                'flex size-full items-center justify-center rounded-full transition-all duration-200 hover:scale-110 hover:bg-white/5',
+                'flex aspect-square h-auto w-full items-center justify-center rounded-full transition-all duration-200 hover:scale-110 hover:bg-white/5',
                 isActive ? `ring-2 ${color.ringColor}` : ''
               )}
               aria-label={`Switch to ${color.id}`}

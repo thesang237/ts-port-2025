@@ -10,13 +10,18 @@ const HomeSidebar = dynamic(() => import('./HomeSidebar'), {
 });
 
 import { ToastProvider } from '@/components/ui/ToastProvider';
-// import MainBackground from './MainBackground';
+import { usePathname, useRouter } from 'next/navigation';
+import { cn } from '@/lib/utils';
+import { useCollapsedUI } from '@/hooks/useCollapsedUI';
+import { unstable_ViewTransition as ViewTransition } from 'react';
 
 interface MainLayoutProps {
   children: ReactNode;
 }
 
 const MainLayout: React.FC<MainLayoutProps> = React.memo(({ children }) => {
+  const isCollapsedUI = useCollapsedUI();
+
   return (
     <ToastProvider>
       {/* <PageLoader /> */}
@@ -42,17 +47,29 @@ const MainLayout: React.FC<MainLayoutProps> = React.memo(({ children }) => {
         {/* Main Content Container */}
         <div className='fixed top-12 right-6 bottom-12 left-6 grid grid-cols-12 gap-6 bg-red-500/0'>
           {/* Sidebar - Now with glass-sidebar class */}
-          <aside className='col-span-3 flex flex-col overflow-hidden rounded-2xl'>
+          <aside
+            className={cn(
+              'flex flex-col overflow-hidden rounded-2xl',
+              isCollapsedUI ? '3xl:col-span-1 col-span-2' : 'col-span-3'
+            )}
+          >
             <div className='flex-1'>
               <HomeSidebar />
             </div>
           </aside>
 
           {/* Main Content Section - Now with glass-content class */}
-          <section className='glass-content relative col-span-9 flex flex-col overflow-hidden rounded-3xl'>
-            <div className='flex-1 overflow-y-auto bg-red-500/0'>
-              {children}
-            </div>
+          <section
+            className={cn(
+              'glass-content relative flex flex-col overflow-hidden rounded-3xl',
+              isCollapsedUI ? '3xl:col-span-11 col-span-10' : 'col-span-9'
+            )}
+          >
+            <ViewTransition name='vt-main-content'>
+              <div className='flex-1 overflow-y-auto bg-red-500/0'>
+                {children}
+              </div>
+            </ViewTransition>
           </section>
         </div>
 

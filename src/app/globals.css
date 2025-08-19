@@ -57,6 +57,9 @@
   --font-mono:
     ui-monospace, SFMono-Regular, 'SF Mono', Consolas, 'Liberation Mono', Menlo,
     monospace;
+
+  /* Custom breakpoint for screens larger than 1920px */
+  --breakpoint-3xl: 1921px;
 }
 
 /* @media (prefers-color-scheme: dark) {
