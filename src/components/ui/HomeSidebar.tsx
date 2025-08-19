@@ -78,8 +78,8 @@ const HomeSidebar = React.memo(() => {
                 href={slug}
                 onClick={handleNavigation(slug)}
                 className={cn(
-                  'relative flex h-12 w-full items-center gap-3 rounded-full px-4 py-3 text-left transition-colors duration-200',
-                  isActive && 'z-10'
+                  'group relative flex h-12 w-full items-center gap-3 rounded-full px-4 py-3 text-left transition-all ease-out duration-200 ',
+                  isActive ? 'z-10' : 'hover:bg-white/5'
                 )}
               >
                 {isActive ? (
@@ -95,13 +95,13 @@ const HomeSidebar = React.memo(() => {
                 <Icon
                   size={24}
                   className={cn(
-                    'z-1 transition-colors duration-200',
+                    'z-1 transition-colors duration-200 group-hover:text-white',
                     isActive ? 'text-white' : 'text-stone-300'
                   )}
                 />
                 <span
                   className={cn(
-                    'z-1 transition-colors duration-200',
+                    'z-1 transition-colors duration-200 group-hover:text-white',
                     isActive
                       ? 'text-white'
                       : 'text-stone-300 hover:text-stone-50'
