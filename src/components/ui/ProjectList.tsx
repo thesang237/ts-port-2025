@@ -6,6 +6,7 @@ import { Project, ProjectFilter } from '@/types/projects';
 import { getProjectsByCategory } from '@/data/projects';
 import { ColorTheme, useThemeStore } from '@/store/useThemeStore';
 import Link from 'next/link';
+import Image from 'next/image';
 import { unstable_ViewTransition as ViewTransition } from 'react';
 
 interface ProjectListProps {
@@ -84,9 +85,11 @@ function ProjectCard({ project, colorClasses }: ProjectCardProps) {
         <div className='absolute inset-0 bg-gradient-to-t from-black/50 to-transparent'>
           {project.image && (
             <ViewTransition name={`${project.id}-banner`}>
-              <img
+              <Image
                 src={project.image}
                 alt={project.title}
+                width={400}
+                height={225}
                 className='h-auto w-full rounded-4xl object-cover'
               />
             </ViewTransition>

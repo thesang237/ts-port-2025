@@ -1,19 +1,22 @@
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
 import { unstable_ViewTransition as ViewTransition } from 'react';
+import { ArrowLeftIcon } from 'lucide-react';
 export default function EternalWalletPage() {
   return (
     <main className='mx-auto max-w-2xl px-4 py-16' id='project-eternal-wallet'>
       {/* <TransitionLink href='/projects/application'>Back</TransitionLink> */}
-      <Link href='/projects/application' className='text-stone-300'>
-        Back
+      <Link href='/projects/application' className='p-4 text-stone-300'>
+        <ArrowLeftIcon className='h-4 w-4' />
       </Link>
       <ViewTransition name='eternal-wallet-banner'>
-        <img
+        <Image
           src='/images/projects/eternal-wallet/main-banner.png'
           alt='Eternal Wallet'
-          className='aspect-1/2 h-auto w-full rounded-4xl object-cover'
-          // style={{ viewTransitionName: `${project.id}-banner` }}
+          width={800}
+          height={400}
+          className=' h-auto w-full rounded-4xl object-cover'
         />
       </ViewTransition>
 

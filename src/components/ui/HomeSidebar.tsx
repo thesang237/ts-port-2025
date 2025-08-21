@@ -130,6 +130,9 @@ const HomeSidebar = React.memo(() => {
           </nav>
         </ViewTransition>
       </div>
+      <div className=' flex flex-col gap-2 text-center p-2'>
+        <p className='text-stone-300'>Project in development</p>
+      </div>
     </div>
   );
 });

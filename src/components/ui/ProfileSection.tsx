@@ -62,7 +62,7 @@ export default function ProfileSection() {
             )}
           >
             <RotatingText
-              texts={['UX/UI Designer', 'Motion Designer', 'Creative Coder']}
+              texts={['UX/UI Designer', 'Motion Design', 'Creative Coder']}
               className='font-bold text-white uppercase'
               staggerFrom={'last'}
               initial={{ y: '50%', opacity: 0 }}
