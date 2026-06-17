@@ -151,7 +151,7 @@ export default function PlayTogetherWeatherPage() {
               </div>
             </div>
             <p className='mb-3 text-sm leading-5 font-semibold text-white/70'>
-              Bấm vào một ô trong bảng để chọn. Ô đang chọn sẽ sáng màu vàng.
+              Bấm vào một ô trong bảng để chọn.
             </p>
 
             <div className='max-h-[calc(100dvh-208px)] overflow-auto rounded-md border border-white/10 bg-black/20 p-2 sm:p-4'>
@@ -205,8 +205,7 @@ export default function PlayTogetherWeatherPage() {
               </span>
             </div>
             <p className='mb-3 text-sm leading-5 font-semibold text-white/70'>
-              Sau khi chọn ô, bấm một thẻ bên dưới để thay vào ô đó. Bạn có
-              thể đổi lại bao nhiêu lần cũng được.
+              Sau khi chọn ô, bấm một thẻ bên dưới để thay vào ô đó.
             </p>
 
             <div className='grid grid-cols-4 gap-2 sm:grid-cols-7 lg:grid-cols-2'>
