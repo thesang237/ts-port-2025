@@ -7,7 +7,7 @@ import { getProjectsByCategory } from '@/data/projects';
 import { ColorTheme, useThemeStore } from '@/store/useThemeStore';
 import Link from 'next/link';
 import Image from 'next/image';
-import { unstable_ViewTransition as ViewTransition } from 'react';
+import ViewTransition from '@/components/ui/ViewTransition';
 
 interface ProjectListProps {
   filter: ProjectFilter;

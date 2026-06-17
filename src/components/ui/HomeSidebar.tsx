@@ -12,7 +12,7 @@ import { CircleUser, Briefcase, CodeXml, BookOpen, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useCloser } from '@/hooks/useCloser';
 import { CLOSER_DURATION } from '@/constants/motion';
-import { unstable_ViewTransition as ViewTransition } from 'react';
+import ViewTransition from '@/components/ui/ViewTransition';
 import { useCollapsedUI } from '@/hooks/useCollapsedUI';
 
 interface MenuItem {

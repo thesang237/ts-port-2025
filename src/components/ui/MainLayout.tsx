@@ -10,10 +10,10 @@ const HomeSidebar = dynamic(() => import('./HomeSidebar'), {
 });
 
 import { ToastProvider } from '@/components/ui/ToastProvider';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { useCollapsedUI } from '@/hooks/useCollapsedUI';
-import { unstable_ViewTransition as ViewTransition } from 'react';
+import ViewTransition from '@/components/ui/ViewTransition';
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -21,6 +21,11 @@ interface MainLayoutProps {
 
 const MainLayout: React.FC<MainLayoutProps> = React.memo(({ children }) => {
   const isCollapsedUI = useCollapsedUI();
+  const pathname = usePathname();
+
+  if (pathname === '/ptg-weather') {
+    return <ToastProvider>{children}</ToastProvider>;
+  }
 
   return (
     <ToastProvider>

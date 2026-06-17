@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import Image from 'next/image';
-import { unstable_ViewTransition as ViewTransition } from 'react';
+import ViewTransition from '@/components/ui/ViewTransition';
 import { ArrowLeftIcon } from 'lucide-react';
 export default function EternalWalletPage() {
   return (

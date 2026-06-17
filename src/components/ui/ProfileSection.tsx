@@ -4,7 +4,7 @@ import { ColorTheme, useThemeStore } from '@/store/useThemeStore';
 import RotatingText from '../ui/RotatingText';
 import { cn, getColorClasses } from '@/lib/utils';
 import { useCollapsedUI } from '@/hooks/useCollapsedUI';
-import { unstable_ViewTransition as ViewTransition } from 'react';
+import ViewTransition from '@/components/ui/ViewTransition';
 
 export default function ProfileSection() {
   const activeColor = useThemeStore(state => state.activeColor);
