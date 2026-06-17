@@ -1,6 +1,5 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
-import { ViewTransitions } from 'next-view-transitions';
 import MainLayout from '@/components/ui/MainLayout';
 import WrapSilk from '@/components/ui/WrapSilk';
 
@@ -18,7 +17,6 @@ export const metadata: Metadata = {
     'User Experience',
     'User Interface',
   ],
-  viewport: 'width=device-width, initial-scale=1',
   icons: {
     icon: '/favicon.ico',
   },
@@ -36,6 +34,11 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -48,7 +51,10 @@ export default function RootLayout({
         {/* Adobe Fonts */}
         <link rel='stylesheet' href='https://use.typekit.net/xxe4rcd.css' />
       </head>
-      <body className='overflow-x-hidden bg-white font-sans text-gray-900 antialiased'>
+      <body
+        className='overflow-x-hidden bg-white font-sans text-gray-900 antialiased'
+        suppressHydrationWarning
+      >
         <WrapSilk />
         <MainLayout>{children}</MainLayout>
       </body>
