@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { Grid3X3, Plus, RefreshCcw, Sparkles } from 'lucide-react';
+import { EyeOff, Grid3X3, Plus, RefreshCcw, Sparkles } from 'lucide-react';
 
 const MIN_SIZE = 2;
 const MAX_SIZE = 8;
@@ -31,10 +31,16 @@ export default function PlayTogetherWeatherPage() {
   const [cards, setCards] = useState<(string | null)[]>(
     Array.from({ length: 16 }, () => null)
   );
+  const [clearedCards, setClearedCards] = useState<Set<number>>(new Set());
 
   const filledCards = useMemo(
-    () => cards.filter(Boolean).length,
-    [cards]
+    () =>
+      cards.reduce(
+        (total, card, index) =>
+          total + (card || clearedCards.has(index) ? 1 : 0),
+        0
+      ),
+    [cards, clearedCards]
   );
 
   const createGrid = () => {
@@ -47,11 +53,13 @@ export default function PlayTogetherWeatherPage() {
     setRows(nextRows);
     setSelectedIndex(null);
     setCards(Array.from({ length: nextColumns * nextRows }, () => null));
+    setClearedCards(new Set());
   };
 
   const resetGrid = () => {
     setSelectedIndex(null);
     setCards(previousCards => previousCards.map(() => null));
+    setClearedCards(new Set());
   };
 
   const replaceSelectedCard = (cardSrc: string) => {
@@ -64,6 +72,23 @@ export default function PlayTogetherWeatherPage() {
         index === selectedIndex ? cardSrc : currentCard
       )
     );
+    setClearedCards(previousCards => {
+      const nextCards = new Set(previousCards);
+      nextCards.delete(selectedIndex);
+      return nextCards;
+    });
+  };
+
+  const clearSelectedCard = () => {
+    if (selectedIndex === null) {
+      return;
+    }
+
+    setClearedCards(previousCards => {
+      const nextCards = new Set(previousCards);
+      nextCards.add(selectedIndex);
+      return nextCards;
+    });
   };
 
   return (
@@ -166,6 +191,7 @@ export default function PlayTogetherWeatherPage() {
               >
                 {cards.map((card, index) => {
                   const isSelected = selectedIndex === index;
+                  const isCleared = clearedCards.has(index);
 
                   return (
                     <button
@@ -181,7 +207,9 @@ export default function PlayTogetherWeatherPage() {
                     >
                       <img
                         alt=''
-                        className='h-full w-full object-cover transition duration-200 group-hover:scale-105'
+                        className={`h-full w-full object-cover transition duration-200 group-hover:scale-105 ${
+                          isCleared ? 'opacity-10' : 'opacity-100'
+                        }`}
                         draggable={false}
                         src={card ?? CARD_BACK}
                       />
@@ -225,6 +253,14 @@ export default function PlayTogetherWeatherPage() {
                   />
                 </button>
               ))}
+              <button
+                aria-label='Đánh dấu thẻ đã xóa'
+                className='group flex aspect-[708/816] items-center justify-center overflow-hidden rounded-md border-2 border-white/15 bg-[#191c40] text-white/70 shadow-md shadow-black/25 transition duration-200 hover:-translate-y-1 hover:border-[#ff6b9a] hover:bg-[#ff6b9a]/15 hover:text-[#ff9fbd] hover:shadow-[#ff6b9a]/20 active:translate-y-0'
+                type='button'
+                onClick={clearSelectedCard}
+              >
+                <EyeOff className='size-1/2 stroke-[3]' />
+              </button>
             </div>
           </aside>
         </div>
