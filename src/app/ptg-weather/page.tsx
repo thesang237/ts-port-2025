@@ -14,7 +14,7 @@ const MIN_SIZE = 2;
 const MAX_COLUMNS = 8;
 const MAX_ROWS = 4;
 const CARD_BACK = '/playtogether/weather/closed-card.png';
-const FRONT_CARDS = Array.from({ length: 8 }, (_, index) => ({
+const FRONT_CARDS = Array.from({ length: 9 }, (_, index) => ({
   id: `weather-${index + 1}`,
   label: `Thẻ thời tiết ${index + 1}`,
   src: `/playtogether/weather/open-card-${index + 1}.png`,
