@@ -6,7 +6,7 @@ import { Grid3X3, Plus, RefreshCcw, Sparkles } from 'lucide-react';
 const MIN_SIZE = 2;
 const MAX_SIZE = 8;
 const CARD_BACK = '/playtogether/weather/closed-card.png';
-const FRONT_CARDS = Array.from({ length: 7 }, (_, index) => ({
+const FRONT_CARDS = Array.from({ length: 8 }, (_, index) => ({
   id: `weather-${index + 1}`,
   label: `Thẻ thời tiết ${index + 1}`,
   src: `/playtogether/weather/open-card-${index + 1}.png`,
