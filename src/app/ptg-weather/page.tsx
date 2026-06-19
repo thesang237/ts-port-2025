@@ -1,10 +1,18 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { EyeOff, Grid3X3, Plus, RefreshCcw, Sparkles } from 'lucide-react';
+import {
+  EyeOff,
+  Grid3X3,
+  Minus,
+  Plus,
+  RefreshCcw,
+  Sparkles,
+} from 'lucide-react';
 
 const MIN_SIZE = 2;
-const MAX_SIZE = 8;
+const MAX_COLUMNS = 8;
+const MAX_ROWS = 4;
 const CARD_BACK = '/playtogether/weather/closed-card.png';
 const FRONT_CARDS = Array.from({ length: 8 }, (_, index) => ({
   id: `weather-${index + 1}`,
@@ -12,24 +20,12 @@ const FRONT_CARDS = Array.from({ length: 8 }, (_, index) => ({
   src: `/playtogether/weather/open-card-${index + 1}.png`,
 }));
 
-function normalizeDimension(value: string) {
-  const parsed = Number.parseInt(value, 10);
-
-  if (Number.isNaN(parsed)) {
-    return MIN_SIZE;
-  }
-
-  return Math.min(MAX_SIZE, Math.max(MIN_SIZE, parsed));
-}
-
 export default function PlayTogetherWeatherPage() {
-  const [columnsInput, setColumnsInput] = useState('4');
-  const [rowsInput, setRowsInput] = useState('4');
   const [columns, setColumns] = useState(4);
-  const [rows, setRows] = useState(4);
+  const [rows, setRows] = useState(2);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [cards, setCards] = useState<(string | null)[]>(
-    Array.from({ length: 16 }, () => null)
+    Array.from({ length: 8 }, () => null)
   );
   const [clearedCards, setClearedCards] = useState<Set<number>>(new Set());
 
@@ -43,12 +39,7 @@ export default function PlayTogetherWeatherPage() {
     [cards, clearedCards]
   );
 
-  const createGrid = () => {
-    const nextColumns = normalizeDimension(columnsInput);
-    const nextRows = normalizeDimension(rowsInput);
-
-    setColumnsInput(String(nextColumns));
-    setRowsInput(String(nextRows));
+  const resizeGrid = (nextColumns: number, nextRows: number) => {
     setColumns(nextColumns);
     setRows(nextRows);
     setSelectedIndex(null);
@@ -117,42 +108,64 @@ export default function PlayTogetherWeatherPage() {
           <div className='flex flex-wrap items-end gap-2'>
             <label className='grid gap-1 text-xs font-bold text-white/75 uppercase'>
               Cột
-              <input
-                aria-label='Số cột'
-                className='h-11 w-20 rounded-md border border-white/20 bg-[#171a3d] px-3 text-center text-lg font-black text-white shadow-inner shadow-black/25 transition focus:border-[#36d6c6] focus:ring-2 focus:ring-[#36d6c6]/35'
-                inputMode='numeric'
-                max={MAX_SIZE}
-                min={MIN_SIZE}
-                type='number'
-                value={columnsInput}
-                onBlur={() =>
-                  setColumnsInput(String(normalizeDimension(columnsInput)))
-                }
-                onChange={event => setColumnsInput(event.target.value)}
-              />
+              <span className='flex overflow-hidden rounded-md border border-white/20 bg-[#171a3d] shadow-inner shadow-black/25'>
+                <button
+                  aria-label='Giảm số cột'
+                  className='grid size-11 place-items-center border-r border-white/15 transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-30'
+                  disabled={columns === MIN_SIZE}
+                  type='button'
+                  onClick={() => resizeGrid(columns - 1, rows)}
+                >
+                  <Minus className='size-4' />
+                </button>
+                <input
+                  aria-label='Số cột'
+                  className='h-11 w-12 bg-transparent text-center text-lg font-black text-white outline-none'
+                  readOnly
+                  type='text'
+                  value={columns}
+                />
+                <button
+                  aria-label='Tăng số cột'
+                  className='grid size-11 place-items-center border-l border-white/15 transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-30'
+                  disabled={columns === MAX_COLUMNS}
+                  type='button'
+                  onClick={() => resizeGrid(columns + 1, rows)}
+                >
+                  <Plus className='size-4' />
+                </button>
+              </span>
             </label>
             <label className='grid gap-1 text-xs font-bold text-white/75 uppercase'>
               Hàng
-              <input
-                aria-label='Số hàng'
-                className='h-11 w-20 rounded-md border border-white/20 bg-[#171a3d] px-3 text-center text-lg font-black text-white shadow-inner shadow-black/25 transition focus:border-[#36d6c6] focus:ring-2 focus:ring-[#36d6c6]/35'
-                inputMode='numeric'
-                max={MAX_SIZE}
-                min={MIN_SIZE}
-                type='number'
-                value={rowsInput}
-                onBlur={() => setRowsInput(String(normalizeDimension(rowsInput)))}
-                onChange={event => setRowsInput(event.target.value)}
-              />
+              <span className='flex overflow-hidden rounded-md border border-white/20 bg-[#171a3d] shadow-inner shadow-black/25'>
+                <button
+                  aria-label='Giảm số hàng'
+                  className='grid size-11 place-items-center border-r border-white/15 transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-30'
+                  disabled={rows === MIN_SIZE}
+                  type='button'
+                  onClick={() => resizeGrid(columns, rows - 1)}
+                >
+                  <Minus className='size-4' />
+                </button>
+                <input
+                  aria-label='Số hàng'
+                  className='h-11 w-12 bg-transparent text-center text-lg font-black text-white outline-none'
+                  readOnly
+                  type='text'
+                  value={rows}
+                />
+                <button
+                  aria-label='Tăng số hàng'
+                  className='grid size-11 place-items-center border-l border-white/15 transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-30'
+                  disabled={rows === MAX_ROWS}
+                  type='button'
+                  onClick={() => resizeGrid(columns, rows + 1)}
+                >
+                  <Plus className='size-4' />
+                </button>
+              </span>
             </label>
-            <button
-              className='inline-flex h-11 items-center gap-2 rounded-md border border-[#36d6c6]/60 bg-[#36d6c6] px-4 text-sm font-black text-[#071514] shadow-lg shadow-[#36d6c6]/25 transition hover:-translate-y-0.5 hover:bg-[#5ff3e6] active:translate-y-0'
-              type='button'
-              onClick={createGrid}
-            >
-              <Plus className='size-4' />
-              Tạo bảng
-            </button>
             <button
               className='inline-flex h-11 items-center gap-2 rounded-md border border-white/20 bg-white/10 px-4 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-white/18 active:translate-y-0'
               type='button'
